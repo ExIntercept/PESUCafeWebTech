@@ -1,0 +1,51 @@
+/* Navbar Styles */
+.navbar {
+    position: fixed;  /* Fixed position at the top */
+    top: 0;           /* Align with the top of the screen */
+    left: 0;          /* Align with the left of the screen */
+    width: 100%;      /* Make it span the full width */
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 20px;
+    background-color: transparent; /* Make navbar transparent */
+    z-index: 10;      /* Ensure it's on top of the HomeScreen */
+  }
+  
+  /* Navbar links */
+  .navbar a {
+    color: rgb(0, 0, 0);              /* Black text */
+    text-decoration: none;     /* Remove underline */
+    padding: 30px 50px;           /* Padding between links */
+    font-size: 24px;
+    position: relative;        /* For positioning the underline */
+    display: inline-block;
+  }
+  
+  /* Hover effect with underline */
+  .navbar a:hover {
+    text-decoration: none;     /* Remove default underline */
+  }
+  
+  /* Create the line above the text */
+  .navbar a::before {
+    content: '';               /* Empty content for the pseudo-element */
+    position: absolute;
+    width: 100%;
+    height: 2px;               /* Height of the line */
+    top: 20px;                 /* Position the line above the text */
+    left: 0;
+    background-color: black;   /* Line color */
+    transform: scaleX(0);      /* Initially scale to 0 (hidden) */
+    transform-origin: top right; /* Start the line from the right side */
+    transition: transform 0.3s ease; /* Smooth transition for the effect */
+  }
+  
+  /* On hover, show the line */
+  .navbar a:hover::before {
+    transform: scaleX(1);      /* Scale to 1 (visible) */
+    transform-origin: top left; /* Move the line from left */
+  }
+  
+  .logo{
+    text-align: right;
+  }
