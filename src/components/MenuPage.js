@@ -1,4 +1,3 @@
-// src/components/MenuPage.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
@@ -24,20 +23,65 @@ function MenuPage() {
     const [showCounter, setShowCounter] = useState(
         Object.keys(initialQuantities).reduce((acc, item) => ({
             ...acc,
-            [item]: initialQuantities[item] > 0, // Show counter if quantity > 0
+            [item]: initialQuantities[item] > 0,
         }), {})
     );
 
+    const [menuItems, setMenuItems] = useState([]);
+    const [loading, setLoading] = useState(false); // Add loading state
+    const [error, setError] = useState(false); // Add error state
+
+    // Fetch menu data from the backend
+    useEffect(() => {
+        setLoading(true);
+        fetch('http://localhost:5000/api/menu')
+            .then(response => response.json())
+            .then(data => {
+                setMenuItems(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching menu data:', error);
+                setError(true);
+                setLoading(false);
+            });
+    }, []);
+
+    // Batch cart updates with debounce
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            sendCartData(quantities);
+        }, 500); // Debounce interval
+
+        return () => clearTimeout(timer); // Cleanup previous timeout
+    }, [quantities]);
+
+    // Function to send updated cart data to the backend
+    const sendCartData = (updatedCart) => {
+        fetch('http://localhost:5000/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedCart),
+        })
+            .then(response => response.json())
+            .then(data => console.log('Cart updated:', data))
+            .catch(error => console.error('Error updating cart:', error));
+    };
+
     const handleQuantityChange = (item, change) => {
         setQuantities((prevQuantities) => {
-            const newQuantity = Math.max(0, prevQuantities[item] + change);
-            if (newQuantity === 0) {
-                setShowCounter((prevShowCounter) => ({ ...prevShowCounter, [item]: false }));
-            } else {
-                setShowCounter((prevShowCounter) => ({ ...prevShowCounter, [item]: true }));
-            }
-            updateCartItem(item, newQuantity); // Update CartContext
-            return { ...prevQuantities, [item]: newQuantity };
+            const newQuantities = {
+                ...prevQuantities,
+                [item]: Math.max(0, prevQuantities[item] + change),
+            };
+            setShowCounter((prevShowCounter) => ({
+                ...prevShowCounter,
+                [item]: newQuantities[item] > 0,
+            }));
+            updateCartItem(item, newQuantities[item]); // Update CartContext
+            return newQuantities;
         });
     };
 
@@ -46,7 +90,13 @@ function MenuPage() {
         handleQuantityChange(item, 1);
     };
 
-    const menuItems = Object.keys(initialQuantities);
+    if (loading) {
+        return <div className="loader">Loading menu...</div>;
+    }
+
+    if (error) {
+        return <div className="error">Failed to load menu. Please try again later.</div>;
+    }
 
     return (
         <div>
@@ -68,17 +118,17 @@ function MenuPage() {
                         <div className="category-item" key={index}>
                             <div
                                 className="category-img"
-                                style={{ backgroundImage: `url(${require(`../images/${item}.jpg`)})` }}
-                                onClick={() => handleImageClick(item)}
+                                style={{ backgroundImage: `url(${item.imageUrl})` }}
+                                onClick={() => handleImageClick(item.name)}
                             >
-                                {!showCounter[item] && <span className="add-button">+</span>}
+                                {!showCounter[item.name] && <span className="add-button">+</span>}
                             </div>
-                            <p>{item.charAt(0).toUpperCase() + item.slice(1)}</p>
-                            {showCounter[item] && (
+                            <p>{item.name}</p>
+                            {showCounter[item.name] && (
                                 <div className="quantity-controls">
-                                    <button onClick={() => handleQuantityChange(item, -1)}>-</button>
-                                    <span>{quantities[item]}</span>
-                                    <button onClick={() => handleQuantityChange(item, 1)}>+</button>
+                                    <button onClick={() => handleQuantityChange(item.name, -1)}>-</button>
+                                    <span>{quantities[item.name]}</span>
+                                    <button onClick={() => handleQuantityChange(item.name, 1)}>+</button>
                                 </div>
                             )}
                         </div>
