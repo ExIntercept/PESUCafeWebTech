@@ -45,9 +45,11 @@ git clone https://github.com/your-username/pesu-cafe.git
 cd pesu-cafe
 ```
 
-### **Run the server
+### **Run the server**
 ```terminal
 npm start
+```
+```new terminal
 cd pesuCafe-backend
 nodemon server.js
 ```
