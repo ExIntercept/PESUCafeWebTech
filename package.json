@@ -1,17 +1,21 @@
 {
+  "name": "pesucafewebtech",
+  "version": "1.0.0",
+  "description": "PESU-Cafe is a food ordering web application designed to streamline ordering from the PES College cafeteria. The app features a React-based frontend and an Express.js + MongoDB backend to handle orders efficiently.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "react-router-dom": "^6.28.0",
-    "react-scripts": "^5.0.1",
-    "proxy": "http://localhost:5000"
-
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "proxy": "http://localhost:5000"
-
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [
