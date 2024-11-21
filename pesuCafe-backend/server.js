@@ -9,9 +9,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connect to MongoDB
+// MongoDB Connection Setup
 mongoose.connect(
-    'mongodb+srv://aryansrivastava1004:PesuCafe123@pesucafe.epqd8.mongodb.net/pesuCafe',
+    'mongodb+srv://aryansrivastava1004:PesuCafe123@pesucafe.epqd8.mongodb.net/?retryWrites=true&w=majority&appName=pesuCafe',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -32,7 +32,7 @@ const cartItemSchema = new mongoose.Schema({
 // Create a Mongoose model
 const CartItem = mongoose.model('CartItem', cartItemSchema);
 
-// Mock menu data (replace with database later)
+// Mock menu data (Replace this with database data in production)
 const menuItems = [
     { name: 'pasta', price: 10.99, imageUrl: '/images/pasta.jpg' },
     { name: 'pizza', price: 12.99, imageUrl: '/images/pizza.jpg' },
@@ -45,18 +45,18 @@ const menuItems = [
 ];
 
 // Routes
+
+// Route to get menu items
 app.get('/api/menu', (req, res) => {
     console.log('Menu items requested');
     res.json(menuItems);
 });
 
-// Save cart items to MongoDB
+// Route to save cart items to MongoDB
 app.post('/api/cart', async (req, res) => {
     const updatedCart = req.body;
 
-    // Clear the previous cart (if needed) and save the new cart
     try {
-        // Clear previous cart (Optional: Add filters if user-specific carts are implemented)
         await CartItem.deleteMany();
 
         const cartData = Object.entries(updatedCart).map(([name, quantity]) => {
@@ -80,7 +80,8 @@ app.post('/api/cart', async (req, res) => {
     }
 });
 
-// Get cart items from MongoDB
+// Route to get cart items from MongoDB
+/*
 app.get('/api/cart', async (req, res) => {
     try {
         const cartItems = await CartItem.find();
@@ -94,6 +95,32 @@ app.get('/api/cart', async (req, res) => {
     } catch (error) {
         console.error('Error retrieving cart from database:', error);
         res.status(500).json({ message: 'Failed to retrieve cart', error });
+    }
+});
+*/
+
+// Route to delete a specific cart item (optional)
+/*app.delete('/api/cart/:name', async (req, res) => {
+    const { name } = req.params;
+    try {
+        await CartItem.deleteOne({ name });
+        console.log(`Cart item '${name}' deleted from database.`);
+        res.json({ message: `Cart item '${name}' deleted successfully.` });
+    } catch (error) {
+        console.error('Error deleting cart item from database:', error);
+        res.status(500).json({ message: 'Failed to delete cart item', error });
+    }
+});*/
+
+// Route to clear the entire cart (optional)
+app.delete('/api/cart', async (req, res) => {
+    try {
+        await CartItem.deleteMany();
+        console.log('All cart items deleted from database.');
+        res.json({ message: 'Cart cleared successfully.' });
+    } catch (error) {
+        console.error('Error clearing cart in database:', error);
+        res.status(500).json({ message: 'Failed to clear cart', error });
     }
 });
 

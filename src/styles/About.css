@@ -1,50 +1,103 @@
 /* src/styles/About.css */
+
 .about-container {
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
     color: #333;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .about-container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    padding-top: 50px;
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
     text-align: center;
+    color: #007bff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .about-description p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
     text-align: center;
+    color: #555;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .about-features h2, .about-contact h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 .about-features ul {
     list-style-type: disc;
     padding-left: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    color: #444;
 }
 
 .about-features li {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.7;
 }
 
 .about-contact p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-align: center;
+    margin-bottom: 1.5rem;
+    color: #444;
 }
 
 .about-contact a {
     color: #007bff;
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .about-contact a:hover {
+    color: #0056b3;
     text-decoration: underline;
+}
+
+/* Add a background gradient to sections */
+.about-description {
+    background: linear-gradient(135deg, #f0f4f8, #e4ebf5);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Feature items - add icons or better spacing */
+.about-features li {
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 30px;
+}
+
+.about-features li::before {
+    content: '✔';
+    position: absolute;
+    left: 10px;
+    top: 2px;
+    color: #007bff;
+    font-size: 1.5rem;
+}
+
+/* Section padding and layout adjustments */
+.about-container section {
+    margin-bottom: 3rem;
 }

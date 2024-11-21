@@ -37,20 +37,32 @@ function Cart() {
                     <ul className="cart-items-list">
                         {Object.entries(cartItems).map(([item, quantity]) => (
                             <li className="cart-item" key={item}>
-                                <span className="item-name">
-                                    {item.charAt(0).toUpperCase() + item.slice(1)}
-                                </span>
-                                <span className="item-quantity">Quantity: {quantity}</span>
+                                <img
+                                    src={`/images/${item}.jpg`} // Assuming images are named after the items
+                                    alt={item}
+                                    className="item-image"
+                                />
+                                <div className="item-info">
+                                    <span className="item-name">
+                                        {item.charAt(0).toUpperCase() + item.slice(1)}
+                                    </span>
+                                    <span className="item-quantity">Quantity: {quantity}</span>
+                                </div>
                             </li>
                         ))}
                     </ul>
-                    <button
-                        className="checkout-button"
-                        onClick={handleCheckout}
-                        disabled={Object.keys(cartItems).length === 0}
-                    >
-                        Proceed to Checkout
-                    </button>
+                    <div className="cart-actions">
+                        <button
+                            className="checkout-button"
+                            onClick={handleCheckout}
+                            disabled={Object.keys(cartItems).length === 0}
+                        >
+                            Proceed to Checkout
+                        </button>
+                        <button className="clear-cart" onClick={clearCart}>
+                            Clear Cart
+                        </button>
+                    </div>
                 </>
             )}
         </div>

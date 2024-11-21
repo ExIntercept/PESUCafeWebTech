@@ -38,7 +38,7 @@ function HomeScreen() {
         <p className="description">
           Enjoy a wide variety of dishes curated specially for you.
         </p>
-        <button className="learn-more-button" onClick={() => navigate('/about')}>Learn More</button>
+        <button className="learn-more-button" onClick={() => navigate('/about')}>Learn More</button>  {/* Fixed path */}
       </div>
       <img src={leaf1} alt="Leaf 1" className="leaf leaf1" />
       <img src={leaf2} alt="Leaf 2" className="leaf leaf2" />

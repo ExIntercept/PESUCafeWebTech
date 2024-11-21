@@ -1,0 +1,154 @@
+/* src/styles/Account.css */
+
+*{
+}
+
+.account-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.account-header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.account-header h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.account-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture {
+  margin-right: 20px;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+  
+  .profile-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .profile-details h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+  }
+  
+  .profile-details p {
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .edit-profile-btn {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-profile-btn:hover {
+    background-color: #357ae8;
+  }
+  
+  /* Settings Section */
+  .settings-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .settings-section h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .settings-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .settings-section li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+  }
+  
+  .action-btn, .danger-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .action-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .action-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .danger-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .danger-btn:hover {
+    background-color: #e53935;
+  }
+  
+  /* Order History Section */
+  .order-history-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-history-section h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .order-history-section p {
+    color: #666;
+  }
+  
